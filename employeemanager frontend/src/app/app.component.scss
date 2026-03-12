@@ -1,0 +1,104 @@
+/* Global styles and imports for Bootstrap and Font Awesome */
+@import 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css';
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+
+/* Navbar dropdown styles */
+.navbar .dropdown-toggle, 
+.navbar .dropdown-menu a {
+    cursor: pointer;
+}
+
+.navbar .dropdown-item.active, 
+.navbar .dropdown-item:active {
+    color: inherit;
+    text-decoration: none;
+    background-color: inherit;
+}
+
+.navbar .dropdown-item:focus, 
+.navbar .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+/* Dropdown arrow */
+@media (min-width: 767px) {
+    .navbar .dropdown-toggle:not(.nav-link)::after {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: .5em;
+        vertical-align: 0;
+        border-bottom: .3em solid transparent;
+        border-top: .3em solid transparent;
+        border-left: .3em solid;
+    }
+}
+
+/* Body styles */
+body {
+    background-color: rgba(235, 238, 255, 1) !important; 
+    color: #888ea8;
+}
+
+/* User profile styles */
+.user-profile .widget-content-area {
+    border-radius: 6px;
+    border: 1px solid #e0e6ed;
+    box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* User info styles */
+.user-profile .user-info {
+    margin-top: 40px;
+}
+
+.user-profile .user-info p {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 22px;
+    color: #009688;
+}
+
+/* Button styles */
+.btn-icon {
+    padding: 7.5px 9px;
+}
+
+/* Profile image shadow */
+.user-profile .widget-content-area .user-info img {
+    border-radius: 9px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* List styles */
+.user-info-list ul.contacts-block {
+    border: none;
+    max-width: 217px;
+    margin: 30px 0 0 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-profile .user-info {
+        flex-direction: column;
+        align-items: center;
+    }
+    .layout-top-spacing {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+.img-fluid.rounded-circle.w-30 {
+    width: 100px;
+}
+
+div.widget-content.widget-content-area.d-flex {
+    width: 400px;
+    height: 500px;
+    margin: 20px;
+}

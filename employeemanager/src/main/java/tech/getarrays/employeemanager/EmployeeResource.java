@@ -47,7 +47,16 @@ public class EmployeeResource {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
-        employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            boolean isDeleted = employeeService.deleteEmployee(id);
+            if (isDeleted) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // 500
+        }
     }
 }

@@ -112,6 +112,4 @@ public class Employee implements Serializable {
                 ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
-
-
 }

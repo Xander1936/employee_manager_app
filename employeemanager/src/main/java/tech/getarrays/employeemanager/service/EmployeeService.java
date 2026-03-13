@@ -9,6 +9,7 @@ import tech.getarrays.employeemanager.model.Employee;
 import tech.getarrays.employeemanager.repo.EmployeeRepo;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -43,10 +44,14 @@ public class EmployeeService {
                 .orElseThrow(() -> new UserNotFoundException("User by id" + id + "was not found"));
     }
 
-    public void deleteEmployee(Long id){
-
-        employeeRepo.deleteEmployeeById(id);
-
+    public boolean deleteEmployee(Long id) {
+        Optional<Employee> employeeOptional = employeeRepo.findById(id);
+        if (employeeOptional.isPresent()) {
+            employeeRepo.delete(employeeOptional.get());
+            return true;
+        }
+        return false;
     }
+
 
 }

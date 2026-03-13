@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Employee } from "./employee";
 import { EmployeeService } from "./employee.service";
 import { HttpErrorResponse } from "@angular/common/http";
-import { NgForm } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 
 @Component({
   // The @Component decorator is used to define the metadata for the AppComponent, including the selector, template URL, and style URLs. The selector 'app-root' is the custom HTML tag that represents this component in the application. The templateUrl points to the HTML file that contains the structure of the component's view, and styleUrls points to the CSS file that contains the styles for this component.
@@ -76,6 +76,22 @@ export class AppComponent implements OnInit{
     );
   }
 
+  // The onDeleteEmployee method is responsible for handling the deletion of an existing employee. It takes an Employee object as an argument, which contains the data for the employee to be deleted. Similar to the onAddEmployee method, it simulates a click on a hidden button to close the modal after deleting an employee, then it calls the deleteEmployee method of the EmployeeService with the employee data. If the request is successful, it logs the response and refreshes the list of employees. If there is an error, it alerts the user with the error message.
+  public onDeleteEmployee(employeeId: number): void {
+    // The employee object is expected to contain the data for the employee to be deleted, which is passed to the deleteEmployee method of the EmployeeService
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+      (response: void) => {
+        console.log(response);
+        // After deleting an employee, refresh the list of employees to reflect the changes
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message); 
+      }
+    );
+  }
+
+
   // The onOpenModal method is responsible for opening the appropriate modal based on the mode (add, edit, delete) and the selected employee.
   public onOpenModal(employee: Employee, mode: string): void {
     // This method dynamically creates a hidden button element and simulates a click on it to open the corresponding modal. The button's data-target attribute is set based on the mode, which determines which modal will be opened (addEmployeeModal, updateEmployeeModal, deleteEmployeeModal). If the mode is 'edit', it also sets the editEmployee property to the selected employee, which can be used to populate the form fields in the edit modal.
@@ -102,6 +118,7 @@ export class AppComponent implements OnInit{
     }
     // If the mode is 'delete', set the data-target to '#deleteEmployeeModal' to open the delete employee modal
     if (mode === 'delete') {
+      this.deleteEmployee = employee;
       // Set the data-target attribute to '#deleteEmployeeModal' to open the delete employee modal
       button.setAttribute('data-target','#deleteEmployeeModal');
     }

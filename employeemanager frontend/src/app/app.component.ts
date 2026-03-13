@@ -91,6 +91,23 @@ export class AppComponent implements OnInit{
     );
   }
 
+  public searchEmployees(key: string): void {
+    // The searchEmployees method is responsible for filtering the list of employees based on a search key. It takes a string as an argument, which is the search key entered by the user. The method iterates through the list of employees and checks if the employee's name, email, job title, or phone number contains the search key (case-insensitive). If a match is found, the employee is added to a results array. After iterating through all employees, the employees property is updated with the filtered results. If no matches are found or if the search key is empty, it calls getEmployees to reset the list to show all employees.
+    const results: Employee[] = [];
+    for (const employee of this.employees) {
+      // The indexOf method is used to check if the search key is present in any of the employee's properties (name, email, job title, phone). The toLowerCase method is used to make the search case-insensitive. If a match is found, the employee is added to the results array.
+      if (employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || employee.phone.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(employee);
+      }
+    }
+    this.employees = results;
+    if (results.length === 0 || !key) {
+      this.getEmployees();
+    }
+  }
 
   // The onOpenModal method is responsible for opening the appropriate modal based on the mode (add, edit, delete) and the selected employee.
   public onOpenModal(employee: Employee, mode: string): void {
